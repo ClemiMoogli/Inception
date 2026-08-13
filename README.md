@@ -6,6 +6,10 @@
 
 # Ressources
 [Docker compose tutorial](https://blog.stephane-robert.info/docs/conteneurs/orchestrateurs/docker-compose/)
+[La conteneurisation](https://blog.stephane-robert.info/docs/conteneurisation/)
+[Les images docker](https://blog.stephane-robert.info/docs/conteneurs/images-conteneurs/)
+[Dockerfile tutorial](https://blog.stephane-robert.info/docs/conteneurs/images-conteneurs/ecrire-dockerfile/)
+[Mariadb](https://mariadb.org/documentation/)
 
 # Project description
 
@@ -16,4 +20,3 @@
 ## Docker Network vs Host Network
 
 ## Docker Volumes vs Bind Mounts
-
