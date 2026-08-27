@@ -4,6 +4,8 @@ networks:
 services:
   mariadb:
     build: ./mariadb
+    restart: always
+    networks: wp-network
     volumes:
       - wordpressDB:/home/cjeannin/data/wordpressDB
 
@@ -12,15 +14,17 @@ services:
       - mariadb
     build: ./wordpress
     restart: always
+    networks: wp-network
     volumes:
       - wordpressfiles:/home/cjeannin/data/wordpressfiles
 
   nginx:
     build: ./nginx
+    restart: always
+    networks: wp-network
     depends_on:
       - wordpress
     ports:
-      - "9000:9000"
       - "443:443"
 
 # make a docker network for the communication between containers
@@ -30,3 +34,5 @@ services:
 volumes:
   wordpressDB:
   wordpressfiles:
+
+
