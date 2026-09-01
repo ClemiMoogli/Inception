@@ -1,38 +1,66 @@
+version: '3'
+
 networks:
-  wp-network:
+    inception:
+        driver: bridge
 
 services:
-  mariadb:
-    build: ./mariadb
-    restart: always
-    networks: wp-network
-    volumes:
-      - wordpressDB:/home/cjeannin/data/wordpressDB
+    mariadb:
+        container_name: mariadb
+        networks:
+            - inception
+        build:
+            context: requirements/mariadb
+            dockerfile: Dockerfile
+        env_file: .env
+        volumes:
+            - mariadb:/var/lib/mysql
+        restart: unless-stopped
+        expose:
+            - "3306"
 
-  wordpress:
-    depends_on:
-      - mariadb
-    build: ./wordpress
-    restart: always
-    networks: wp-network
-    volumes:
-      - wordpressfiles:/home/cjeannin/data/wordpressfiles
+    nginx:
+        container_name: nginx
+        networks:
+            - inception
+        depends_on:
+            - wordpress
+        build:
+            context: requirements/nginx
+            dockerfile: Dockerfile
+        env_file: .env
+        volumes:
+            - wordpress:/var/www/wordpress
+        restart: on-failure
+        ports:
+            - "443:443"
 
-  nginx:
-    build: ./nginx
-    restart: always
-    networks: wp-network
-    depends_on:
-      - wordpress
-    ports:
-      - "443:443"
+    wordpress:
+        container_name: wordpress
+        env_file: .env
+        volumes:
+            - wordpress:/var/www/wordpress
+        networks:
+            - inception
+        build:
+            context: requirements/wordpress
+            dockerfile: Dockerfile
+        depends_on:
+            - mariadb
+        restart: on-failure
+        expose:
+            - "9000"
 
-# make a docker network for the communication between containers
-#
-
-# named volume with data stored in /home/cjeannin/data
 volumes:
-  wordpressDB:
-  wordpressfiles:
-
-
+    wordpress:
+        driver: local
+        driver_opts:
+            type: 'none'
+            o: 'bind'
+            device: '/home/cjeannin/data/wordpress'
+    mariadb:
+        driver: local
+        driver_opts:
+            type: 'none'
+            o: 'bind'
+            device: "/home/cjeannin/data/mariadb"
