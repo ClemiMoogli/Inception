@@ -1,5 +1,7 @@
 
 # a lancer sur la vm: echo "net.ipv4.ip_unprivileged_port_start=443" | sudo tee -a /etc/sysctl.conf
+# sudo mkdir -p /home/cjeannin/data
+# sudo chown -R clement:clement /home/cjeannin
 NAME = inception
 DATA_PATH = /home/cjeannin/data
 
