@@ -1,0 +1,5 @@
+# ignore secrets and local env files
+secrets/
+srcs/.env.local
+node_modules/
+.DS_Store
