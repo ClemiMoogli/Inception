@@ -10,7 +10,6 @@ RUN apt-get update -y \
 
 COPY conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
-# Download and extract WordPress
 RUN wget https://fr.wordpress.org/wordpress-6.0-fr_FR.tar.gz -P /var/www \
  && cd /var/www && tar -xvf wordpress-6.0-fr_FR.tar.gz && rm wordpress-6.0-fr_FR.tar.gz
 
@@ -28,5 +27,4 @@ ENTRYPOINT ["/auto_config.sh"]
 
 EXPOSE 9000
 
-# Start php-fpm in foreground (auto_config.sh will exec the CMD)
 CMD ["php-fpm8.2", "-F"]

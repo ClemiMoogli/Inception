@@ -1,7 +1,6 @@
 #!/bin/sh
 set -e
 
-# If Docker secrets are provided, load them into environment variables
 if [ -f /run/secrets/db_password ]; then
   export SQL_PASSWORD="$(cat /run/secrets/db_password)"
 fi
