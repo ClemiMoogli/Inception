@@ -39,6 +39,8 @@ services:
             - "9000"
         secrets:
             - db_password
+            - wp_admin_password
+            - wp_second_password
 
     nginx:
         container_name: nginx
@@ -75,3 +77,7 @@ secrets:
         file: ../secrets/db_password.txt
     db_root_password:
         file: ../secrets/db_root_password.txt
+    wp_admin_password:
+        file: ../secrets/wp_admin_password.txt
+    wp_second_password:
+        file: ../secrets/wp_second_password.txt
