@@ -7,10 +7,10 @@ fi
 if [ -f /run/secrets/db_root_password ]; then
   export SQL_ROOT_PASSWORD="$(cat /run/secrets/db_root_password)"
 fi
-
+66
 if [ ! -d "/var/lib/mysql/mysql" ]; then
   echo "Init de la bdd..."
-  service mysql start
+  service mariadb start
 
   while ! mysqladmin ping 2>/dev/null; do
     sleep 1
