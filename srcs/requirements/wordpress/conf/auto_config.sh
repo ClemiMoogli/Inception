@@ -1,10 +1,7 @@
 #!/bin/sh
 set -e
 
-# Wait for MariaDB to be ready
-until mysqladmin ping -h mariadb --silent; do
-    sleep 1
-done
+
 
 # Loading the secrets.
 if [ -f /run/secrets/db_password ]; then
@@ -19,6 +16,10 @@ if [ -f /run/secrets/wp_second_password ]; then
     export WP_SECOND_PASSWORD="$(cat /run/secrets/wp_second_password)"
 fi
 
+until mysqladmin ping -h mariadb -u"$SQL_USER" -p"$SQL_PASSWORD" --silent; do
+    sleep 1
+done
+
 if [ ! -f /var/www/wordpress/wp-config.php ]; then
         wp config create --allow-root \
         --dbname="$SQL_DATABASE" \
@@ -32,10 +33,8 @@ if [ ! -f /var/www/wordpress/wp-config.php ]; then
             --admin_user="$WP_ADMIN_USER" --admin_password="$WP_ADMIN_PASSWORD" \
             --admin_email="$WP_ADMIN_EMAIL"
 
-        # create a second (non-admin) user
         wp user create "$WP_SECOND_USER" "$WP_SECOND_EMAIL" \
             --user_pass="$WP_SECOND_PASSWORD" --role=author --allow-root --path='/var/www/wordpress'
 fi
 
-# Exec passed command (start php-fpm)
 exec "$@"
