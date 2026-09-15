@@ -13,6 +13,7 @@ Prerequisites (VM setup):
 - `cjeannin.42.fr` resolving to `127.0.0.1` in the VM's `/etc/hosts`.
 
 Configuration files to provide before the first build:
+- update the .env file.
 - `srcs/.env` — already versioned, holds the non-sensitive configuration (database name, WordPress users/emails, `DOMAIN_NAME`). Edit it if you need to change these values.
 - `secrets/*.txt` — **not** versioned (listed in `.gitignore`), must be created manually, one password per file:
   - `secrets/db_password.txt`

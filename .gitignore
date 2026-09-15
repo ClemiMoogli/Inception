@@ -1,5 +1,4 @@
 # ignore secrets and local env files
 secrets/*.txt
-# TODO: rename .env.local to .env
-srcs/.env.local 
+srcs/.env
 .DS_Store

@@ -87,10 +87,3 @@ A "named volume" is simply a Docker volume to which the user gives an explicit n
 
 
 
-
-## TODO
-
-- [ ] Untrack committed secret files with `git rm --cached` (they are currently tracked despite being listed in `.gitignore` — see [USER_DOC.md](USER_DOC.md)).
-- [ ] Add the required secrets (see [USER_DOC.md](USER_DOC.md)).
-- [ ] Update `.gitignore`: it still references `srcs/.env.local`, but the project now uses `srcs/.env`.
-- [ ] Add a manual entry in the VM's `/etc/hosts`: `127.0.0.1 cjeannin.42.fr`.
