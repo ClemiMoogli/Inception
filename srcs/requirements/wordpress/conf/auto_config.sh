@@ -20,8 +20,6 @@ until mysqladmin ping -h mariadb -u"$SQL_USER" -p"$SQL_PASSWORD" --silent; do
     sleep 1
 done
 
-# echo "OK" >> /vboxuser/Inception/tmp.txt 
-
 if [ ! -f /var/www/wordpress/wp-config.php ]; then
         wp config create --allow-root \
         --dbname="$SQL_DATABASE" \
