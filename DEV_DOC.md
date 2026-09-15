@@ -5,8 +5,9 @@
 Prerequisites (VM setup):
 - A Virtual Machine running the penultimate stable Debian.
 - Docker and the Docker Compose plugin installed. (sudo apt install git make docker.io docker-compose)
-- add the user to the docker group: sudo usermod -aG docker $USER
 - Open the port 443 on the VM: echo "net.ipv4.ip_unprivileged_port_start=443" | sudo tee -a /etc/sysctl.conf
+- sudo usermod -aG docker $USER
+- reebot the VM or newgrp docker
 - sudo mkdir -p /home/cjeannin/data
 - sudo chown -R {user}:{user} /home/cjeannin
 - `cjeannin.42.fr` resolving to `127.0.0.1` in the VM's `/etc/hosts`.
